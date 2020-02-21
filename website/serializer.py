@@ -37,4 +37,5 @@ class LocationSerializer(ModelSerializer):
     class Meta:
         model=LocationData
         fields ='__all__'
-        depth=1                        
+        depth=4
+                               
