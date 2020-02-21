@@ -12,11 +12,44 @@ class RegionListApiView(ListAPIView):
     
 class CountryListApiView(ListAPIView):
     queryset=Country.objects.all()
+    print("top",queryset)
     serializer_class=CountrySerializer
     
     def get_queryset(self):
-        country_var=self.kwargs.get('country',None)
-        queryset=self.queryset.filter(region__name=country_var) #look at region in country model and then name in Region model 
+        region_var=self.kwargs.get('region',None)
+        queryset=self.queryset.filter(region__name=region_var) #look at region in country model and then name in Region model 
+        print("queryset is ",list(queryset))
+        print("len",len(queryset))
+        for x in range(len(queryset)):
+           print(queryset[x])
+
         return queryset
         
+ 
+class StateListApiView(ListAPIView):
+    queryset=State.objects.all()
+    serializer_class=StateSerializer
+   
+    def get_queryset(self):
+        region_var=self.kwargs.get('region',None)
+        country_var=self.kwargs.get('country',None)
+        queryset=self.queryset.filter(country__name=country_var,country__region__name=region_var)
+        return queryset
         
+    
+  
+class CityListApiView(ListAPIView):
+     queryset=City.objects.all()
+     serializer_class=CitySerializer
+     def get_queryset(self):
+        region_var=self.kwargs.get('region',None)
+        country_var=self.kwargs.get('country',None)
+        state_var=self.kwargs.get('state',None)
+        queryset=self.queryset.filter(state__name=state_var,state__country__name=country_var,state__country__region__name=region_var)
+        return queryset
+         
+               
+           
+           
+           
+           
