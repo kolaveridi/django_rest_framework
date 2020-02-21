@@ -5,4 +5,5 @@ urlpatterns =[
     re_path(r'^location/(?P<region>\w+)/$',views.CountryListApiView.as_view(),name="CountryListApiView"),
     re_path(r'^location/(?P<region>\w+)/(?P<country>\w+)/$',views.StateListApiView.as_view(),name="StateListApiView"),
     re_path(r'^location/(?P<region>\w+)/(?P<country>\w+)/(?P<state>\w+)/$',views.CityListApiView.as_view(),name="CityListApiView"),
+     re_path(r'^location/(?P<region>\w+)/(?P<country>\w+)/(?P<state>\w+)/(?P<city>\w+)/$',views.LocationDataListApiView.as_view(),name="LocationDataListApiView"),
 ]

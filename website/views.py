@@ -49,6 +49,23 @@ class CityListApiView(ListAPIView):
         return queryset
          
                
+       
+class LocationDataListApiView(ListAPIView):
+    queryset=LocationData.objects.all()
+    serializer_class=LocationSerializer
+    def get_queryset(self):
+        region_var=self.kwargs.get('region',None)
+        country_var=self.kwargs.get('country',None)
+        state_var=self.kwargs.get('state',None)
+        city_var=self.kwargs.get('city',None)
+        queryset=self.queryset.filter(
+            city__name=city_var,
+            city__state__country__name=country_var,
+            city__state__country__region__name=region_var,
+            city__state__name=state_var
+            )
+        return queryset
+               
            
            
            
